@@ -17,36 +17,6 @@ export async function createApi(deps: HttpAppDeps) {
 
   app.use(cors());
 
-  // if (isDevelopment) {
-  //   watchStaticAssets();
-
-  //   // SSE Endpoint for Live Reload
-  //   app.get("/api/_livereload", async function* ({ request }) {
-  //     yield sse("ping");
-  //     const queue: string[] = [];
-
-  //     buildEvents.on("built", () => queue.push("reload"));
-
-  //     const interval = setInterval(() => {
-  //       try {
-  //         queue.push("ping");
-  //       } catch (err) {}
-  //     }, 1000);
-
-  //     request.signal.onabort = () => {
-  //       clearInterval(interval);
-  //     };
-
-  //     while (true) {
-  //       if (queue.length > 0) {
-  //         yield sse(queue.shift()!);
-  //       } else {
-  //         await new Promise((resolve) => setTimeout(resolve, 1));
-  //       }
-  //     }
-  //   });
-  // }
-
   app.get("/health", () => ({ status: "ok" }));
   app.use(invoiceApiRoutes(deps));
 

@@ -3,20 +3,12 @@ import { InMemoryInvoicePreviewRepository } from "./src/core/adapters/in-memory-
 import { createApi } from "./src/http/app";
 import indexFile from "./src/web/public/index.html";
 
-
 const port = Number(Bun.env.PORT ?? 3000);
 
 const elysiaApi = await createApi({
   buildInvoiceUseCase: new BuildInvoiceUseCase(),
   previewRepository: new InMemoryInvoicePreviewRepository(),
 });
-
-// if (process.env.NODE_ENV !== "production") {
-//   mkdir("./dist/web", { recursive: true }, (err) => {
-//     if (err) throw err;
-//   });
-//   await buildStaticAssets();
-// }
 
 Bun.serve({
   port,
@@ -27,7 +19,7 @@ Bun.serve({
   fetch: async (req, res) => {
     if (req.url.includes("/_static")) {
       return new Response(
-        Bun.file("./dist/web" + req.url.split("/_static")[1]),
+        Bun.file("./src/web/public" + req.url.split("/_static")[1]),
       );
     }
     return new Response("not found", { status: 404 });
