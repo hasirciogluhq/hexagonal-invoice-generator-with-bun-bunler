@@ -1,4 +1,4 @@
-import { Elysia } from "elysia";
+import { Elysia, sse } from "elysia";
 import { cors } from "@elysiajs/cors";
 import { staticPlugin } from "@elysiajs/static";
 import type { BuildInvoiceUseCase } from "../core/application/build-invoice-usecase";
@@ -10,29 +10,45 @@ interface HttpAppDeps {
   previewRepository: InvoicePreviewPort;
 }
 
-export async function createHttpApp(deps: HttpAppDeps) {
+export async function createApi(deps: HttpAppDeps) {
   const isDevelopment = process.env.NODE_ENV === "development";
 
   const app = new Elysia();
 
   app.use(cors());
 
-  // Serve static assets from the build directory
-  app.use(
-    await staticPlugin({
-      assets: "dist/web",
-      prefix: "/web",
-    }),
-  );
+  // if (isDevelopment) {
+  //   watchStaticAssets();
+
+  //   // SSE Endpoint for Live Reload
+  //   app.get("/api/_livereload", async function* ({ request }) {
+  //     yield sse("ping");
+  //     const queue: string[] = [];
+
+  //     buildEvents.on("built", () => queue.push("reload"));
+
+  //     const interval = setInterval(() => {
+  //       try {
+  //         queue.push("ping");
+  //       } catch (err) {}
+  //     }, 1000);
+
+  //     request.signal.onabort = () => {
+  //       clearInterval(interval);
+  //     };
+
+  //     while (true) {
+  //       if (queue.length > 0) {
+  //         yield sse(queue.shift()!);
+  //       } else {
+  //         await new Promise((resolve) => setTimeout(resolve, 1));
+  //       }
+  //     }
+  //   });
+  // }
 
   app.get("/health", () => ({ status: "ok" }));
   app.use(invoiceApiRoutes(deps));
-
-  // SPA Fallback: Serve index.html for any other route
-  app.get("*", ({ path }) => {
-    if (path.startsWith("/api") || path.startsWith("/web")) return;
-    return Bun.file("src/web/public/index.html");
-  });
 
   return app;
 }

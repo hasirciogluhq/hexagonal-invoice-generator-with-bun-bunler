@@ -1,17 +1,35 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<title>Hexagonal Invoice Generator</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-        <style>
-            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-            body { font-family: 'Inter', sans-serif; }
-        </style>
-	</head>
-	<body class="bg-gray-50">
-		<div id="root"></div>
-		<script type="module" src="/web/app.js"></script>
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hexagonal Invoice Generator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+      body {
+        font-family: "Inter", sans-serif;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50">
+    <div id="root"></div>
+    <script type="module" src="./index.tsx"></script>
+    <script>
+      // Simple Live Reload for Development
+      // console.log(process.env.NODE_ENV);
+      // if (
+      //   window.location.hostname === "localhost" ||
+      //   window.location.hostname === "127.0.0.1"
+      // ) {
+      //   const source = new EventSource("/api/_livereload");
+      //   source.onmessage = (e) => {
+      //     if (e.data === "reload") {
+      //       console.log("Rebuilding finished. Reloading...");
+      //       window.location.reload();
+      //     }
+      //   };
+      // }
+    </script>
+  </body>
 </html>
