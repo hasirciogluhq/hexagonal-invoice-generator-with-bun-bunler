@@ -17,7 +17,6 @@ export function invoiceApiRoutes(deps: InvoiceApiDeps) {
 
   return app
     .get("/invoice", handler)
-    .get("/invocie", handler)
     .post("/invoice", ({ body }) => {
       return deps.buildInvoiceUseCase.execute(body as any);
     });

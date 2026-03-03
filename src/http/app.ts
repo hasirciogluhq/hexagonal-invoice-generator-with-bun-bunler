@@ -4,7 +4,6 @@ import { staticPlugin } from "@elysiajs/static";
 import type { BuildInvoiceUseCase } from "../core/application/build-invoice-usecase";
 import type { InvoicePreviewPort } from "../core/ports/invoice-preview-port";
 import { invoiceApiRoutes } from "./routes/invoice-api-routes";
-import { join } from "path";
 
 interface HttpAppDeps {
   buildInvoiceUseCase: BuildInvoiceUseCase;
@@ -20,10 +19,9 @@ export async function createHttpApp(deps: HttpAppDeps) {
 
   // Serve static assets from /static
   app.use(
-    staticPlugin({
-      assets: "src/web/public",
-      prefix: "/web",
-    })
+    await staticPlugin({
+      assets: "dist/web",
+    }),
   );
 
   app.get("/health", () => ({ status: "ok" }));

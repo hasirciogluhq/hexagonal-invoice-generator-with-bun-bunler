@@ -4,7 +4,7 @@ export async function buildStaticAssets() {
     const result = await Bun.build({
       entrypoints: ["src/web/public/index.tsx"],
       outdir: "dist/web",
-      naming: "app.sjs",
+      naming: "app.js",
       minify: true,
       sourcemap: "none",
     });
