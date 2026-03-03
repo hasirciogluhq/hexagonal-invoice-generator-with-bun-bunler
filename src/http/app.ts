@@ -15,7 +15,11 @@ export async function createApi(deps: HttpAppDeps) {
 
   const app = new Elysia();
 
-  app.use(cors());
+  app.use(
+    cors({
+      origin: "*",
+    }),
+  );
 
   app.get("/health", () => ({ status: "ok" }));
   app.use(invoiceApiRoutes(deps));

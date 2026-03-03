@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build:static": "bun run scripts/build-static.ts",
-    "start": "NODE_ENV=production bun run index.ts",
+    "start": "cd dist && NODE_ENV=production bun run index.js",
     "dev": "NODE_ENV=development bun --hot index.ts",
     "typecheck": "tsc --noEmit"
   },
