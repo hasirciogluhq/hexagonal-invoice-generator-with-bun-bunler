@@ -3,12 +3,12 @@ export async function buildStaticAssets() {
   try {
     const result = await Bun.build({
       entrypoints: ["src/web/public/index.tsx"],
-      outdir: "static",
-      naming: "app.js",
+      outdir: "dist/web",
+      naming: "app.sjs",
       minify: true,
       sourcemap: "none",
     });
-    
+
     if (!result.success) {
       console.error("Build failed", result.logs);
       throw new Error("Build failed");
@@ -18,4 +18,8 @@ export async function buildStaticAssets() {
     console.error("Error building static assets", e);
     throw e;
   }
+}
+
+if (import.meta.main) {
+  buildStaticAssets();
 }
