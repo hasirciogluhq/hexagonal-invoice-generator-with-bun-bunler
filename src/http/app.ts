@@ -17,15 +17,22 @@ export async function createHttpApp(deps: HttpAppDeps) {
 
   app.use(cors());
 
-  // Serve static assets from /static
+  // Serve static assets from the build directory
   app.use(
     await staticPlugin({
       assets: "dist/web",
+      prefix: "/web",
     }),
   );
 
   app.get("/health", () => ({ status: "ok" }));
   app.use(invoiceApiRoutes(deps));
+
+  // SPA Fallback: Serve index.html for any other route
+  app.get("*", ({ path }) => {
+    if (path.startsWith("/api") || path.startsWith("/web")) return;
+    return Bun.file("src/web/public/index.html");
+  });
 
   return app;
 }
