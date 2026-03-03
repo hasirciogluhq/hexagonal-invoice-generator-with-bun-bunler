@@ -52,7 +52,7 @@ function LandingPage() {
                     <span className="text-indigo-600">for your modern business.</span>
                 </h1>
                 <p className="text-xl text-slate-500 max-w-2xl mx-auto mb-10 leading-relaxed">
-                    Generate, preview and manage your invoices with the world's most elegant generator. 
+                    Generate, preview and manage your invoices with the world's most elegant generator.
                     Built with Bun, Elysia, and Stripe-inspired design.
                 </p>
                 <div className="flex justify-center gap-4">
@@ -65,7 +65,7 @@ function LandingPage() {
                         View Demo
                     </Button>
                 </div>
-                
+
                 <div className="mt-20 relative px-4">
                     <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-2xl blur opacity-20 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
                     <div className="relative bg-white border border-slate-200 rounded-2xl shadow-2xl overflow-hidden aspect-[16/9] flex items-center justify-center text-slate-300">
@@ -101,7 +101,7 @@ function GeneratorPage() {
     const generateInvoice = async () => {
         setLoading(true);
         try {
-            const payload = { 
+            const payload = {
                 lineItems: items,
                 ...(coupon ? { coupon } : {})
             };
