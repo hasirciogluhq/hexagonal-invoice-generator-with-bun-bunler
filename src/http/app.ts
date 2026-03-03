@@ -21,8 +21,8 @@ export async function createHttpApp(deps: HttpAppDeps) {
   // Serve static assets from /static
   app.use(
     staticPlugin({
-      assets: "static",
-      prefix: "/static",
+      assets: "src/web/public",
+      prefix: "/web",
     })
   );
 
@@ -34,14 +34,6 @@ export async function createHttpApp(deps: HttpAppDeps) {
     }
     return Bun.file("src/web/public/index.html");
   });
-
-  // Serve other files in public if needed
-  app.use(
-    staticPlugin({
-        assets: "src/web/public",
-        prefix: "/web",
-    })
-  );
 
   app.get("/health", () => ({ status: "ok" }));
   app.use(invoiceApiRoutes(deps));
