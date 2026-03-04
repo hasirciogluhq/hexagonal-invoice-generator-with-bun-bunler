@@ -13,7 +13,7 @@ interface HttpAppDeps {
 export async function createApi(deps: HttpAppDeps) {
   const isDevelopment = process.env.NODE_ENV === "development";
 
-  const app = new Elysia();
+  const app = new Elysia({prefix: "/api"});
 
   app.use(
     cors({

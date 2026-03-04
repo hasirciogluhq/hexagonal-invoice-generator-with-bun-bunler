@@ -8,7 +8,7 @@ interface InvoiceApiDeps {
 }
 
 export function invoiceApiRoutes(deps: InvoiceApiDeps) {
-  const app = new Elysia({ prefix: "/api" });
+  const app = new Elysia({ prefix: "/" });
 
   const handler = () => {
     const params = deps.previewRepository.getPreviewParams();
