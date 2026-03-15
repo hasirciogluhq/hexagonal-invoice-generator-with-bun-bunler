@@ -14,6 +14,5 @@ FROM oven/bun:latest AS runner
 
 COPY --from=builder /app/dist .
 
-
 # Run the application
 CMD ["bun", "run", "index.js"]
