@@ -12,4 +12,4 @@ RUN bun install --production --frozen-lockfile
 COPY . .
 
 # Run the application
-CMD ["bun", "index.ts"]
+CMD ["cd", "dist && bun run index.js"]
